@@ -7,7 +7,7 @@ OBJ = ./build
 BIN = ./bin
 
 CPPFLAGS = -O0 -Wall -pedantic -std=c++11 -I$(INC)
-OBJECTS = $(OBJ)/movimentacao.o $(OBJ)/conta.o $(OBJ)/corrente.o $(OBJ)/poupanca.o $(OBJ)/banco.o $(OBJ)/produto.o $(OBJ)/bebida.o $(OBJ)/fruta.o $(OBJ)/roupa.o
+OBJECTS = $(OBJ)/movimentacao.o $(OBJ)/conta.o $(OBJ)/corrente.o $(OBJ)/poupanca.o $(OBJ)/banco.o $(OBJ)/produto.o $(OBJ)/bebida.o $(OBJ)/fruta.o $(OBJ)/roupa.o $(OBJ)/main.o
 
 PROG = $(BIN)/lab6
 
@@ -28,6 +28,7 @@ $(OBJ)/poupanca.o: $(INC)/poupanca.h $(OBJ)/conta.o
 
 $(OBJ)/banco.o: $(INC)/banco.h $(OBJ)/movimentacao.o $(OBJ)/conta.o $(OBJ)/corrente.o $(OBJ)/poupanca.o
 	$(CC) $(CPPFLAGS) -c $(SRC)/banco.cpp -o $@
+
 $(OBJ)/produto.o: $(INC)/produto.h 
 	$(CC) $(CPPFLAGS) -c $(SRC)/produto.cpp -o $@
 
@@ -39,6 +40,9 @@ $(OBJ)/fruta.o: $(INC)/fruta.h
 
 $(OBJ)/roupa.o: $(INC)/roupa.h 
 	$(CC) $(CPPFLAGS) -c $(SRC)/roupa.cpp -o $@
+
+$(SRC)/main.o: $(OBJ)/movimentacao.o $(OBJ)/conta.o $(OBJ)/corrente.o $(OBJ)/poupanca.o $(OBJ)/banco.o $(OBJ)/produto.o $(OBJ)/bebida.o $(OBJ)/fruta.o $(OBJ)/roupa.o
+	$(CC) $(CPPFLAGS) -c $(SRC)/main.cpp -o $@	
 
 clean:
 	rm -f $(PROG) $(OBJECTS)
